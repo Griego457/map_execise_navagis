@@ -10,11 +10,11 @@ const RankingChart = ({places}) => {
         <Card elevation={6}>
             <CardContent>
             <Typography variant='h5'>
-                    Restorant Ranking
+            Restaurant Ranking
             </Typography>
             <BarChart width={750} height={250} data={places} barSize={20}>
                 <XAxis dataKey="name" />
-                <YAxis dataKey="ranking_position" type="number" />
+                <YAxis dataKey="ranking_position" type="number" domain={[0, 60]} />
                 <Tooltip />
                 <Legend />
                 <Bar dataKey="ranking_position" fill="#8884d8" />

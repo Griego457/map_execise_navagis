@@ -2,20 +2,20 @@ import axios from "axios";
 
 const URL = "https://travel-advisor.p.rapidapi.com/restaurants/list-in-boundary";
 const GetPlaceInfoURL = "https://travel-advisor.p.rapidapi.com/restaurants/get-details";
-const backEndAPI = "http://localhost:5000/post";
+const backEndAPI = "https://navagismapexercise.herokuapp.com/post";
 
 export const fecthPosts = () => axios.get(backEndAPI);
 export const createPost = (newPost) => axios.post(backEndAPI, newPost);
 export const updatePost = (id, updatePost) => axios.patch(`${backEndAPI}/${id}`, updatePost);
 
-export const getPlacesInfo = async (type, sw, ne) => {
+export const getPlacesInfo = async (type) => {
     try {
         const { data: {data} } = await axios.get(URL, {
           params: {
-          bl_latitude: sw.lat,
-          tr_latitude: ne.lat,
-          bl_longitude: sw.lng,
-          tr_longitude: ne.lng,
+          bl_latitude: 10.249791235350315,
+          tr_latitude: 10.36632582573391,
+          bl_longitude: 123.81445330474241,
+          tr_longitude: 124.02748507354124,
           restaurant_tagcategory_standalone: type,
         },
         headers: {

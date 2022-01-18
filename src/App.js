@@ -12,29 +12,7 @@ const App = () => {
     const [coordinates, setCoordinates] = useState({});
     const [bounds, setBounds] = useState({});
     const [type, setType] = useState({});
-    const [restoInsideCircle, setRestoInsideCircle] = useState(null);
-
-    const isInsideRadius = (restoPosition, coordinates, km) => {
-        var ky = 40000 / 360;
-        var kx = Math.cos(Math.PI * restoPosition.lat / 180.0) * ky;
-        var dx = Math.abs(coordinates.lng - restoPosition.lng) * kx;
-        var dy = Math.abs(coordinates.lat - restoPosition.lat) * ky;
-        return Math.sqrt(dx * dx + dy * dy) <= km;
-    }
-
-    const distance = (placesData) => {
-        setTimeout(() => {
-            const item = [];
-            for(var i=0; placesData.length > i; i++){
-                var restoPosition = {lat : Number(placesData[i].latitude), lng: Number(placesData[i].longitude)};
-                var n = isInsideRadius(restoPosition, coordinates, 7);
-                if(n){
-                    item.push(1);
-                }
-            };
-            setRestoInsideCircle(item.length);
-        }, 5000);
-    }
+    
 
     useEffect(() => {
         setType('all')
@@ -43,13 +21,13 @@ const App = () => {
 
 
     useEffect(() => {
-            getPlacesInfo(type, bounds.sw, bounds.ne)
+        
+            getPlacesInfo(type,)
             .then((data)=>{
                 setPlaces(data);
-                distance(data);
             });
             
-    }, [type ,coordinates, bounds])
+    }, [type])
 
     return (
         <>
@@ -68,7 +46,6 @@ const App = () => {
                         setBounds={setBounds}
                         coordinates={coordinates}
                         places={places}
-                        countRestoInsideRadius={restoInsideCircle}
                     />
                 </Grid>
             </Grid>
